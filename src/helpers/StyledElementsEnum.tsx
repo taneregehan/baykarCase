@@ -55,7 +55,7 @@ export const appColors = {
   antrasit: "#313131",
 };
 
-export const defaultTextStyles = ["c-antrasit", "size-13", "regular"];
+export const defaultTextStyles = ["c-antrasit", "size-13", "custom"];
 
 const generalStyles = StyleSheet.create({
   fullWidth: {
@@ -93,6 +93,9 @@ const generalStyles = StyleSheet.create({
   },
   absolute: {
     position: "absolute",
+  },
+  font: {
+    fontFamily: "custom",
   },
   between: {
     justifyContent: "space-between",

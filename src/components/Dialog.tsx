@@ -85,7 +85,7 @@ const Dialog = forwardRef<DialogRef, DialogProps>((props: DialogProps, ref) => {
             ]}>
             <Div
               styles={`bg-${background} ph-10 roundTopLeft-10 roundTopRight-10 flexBox maxH-700`}>
-                <Div styles="h-3 w-96 bg-antrasit mt-10 rounded-10 items-center contentCenter center " />
+              <Div styles="h-3 w-96 bg-antrasit mt-10 rounded-10 items-center contentCenter center " />
               <Div styles="row w-355 center ph-10 rounded-10 pv-4 mv-10 items-center">
                 <Touchable styles="flexBox" onPress={handleConfirm}>
                   {showConfirm && (
@@ -98,6 +98,7 @@ const Dialog = forwardRef<DialogRef, DialogProps>((props: DialogProps, ref) => {
               {contentHeight >= hp(700) ? (
                 <ScrollView
                   showsVerticalScrollIndicator={false}
+                  scrollEventThrottle={16}
                   contentContainerStyle={{ paddingBottom: hp(44) }}>
                   <Div
                     onLayout={(layout) =>

@@ -25,6 +25,15 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "fonts": {
+      "customFont":"./assets/font.ttf" 
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
+  
 }
+
+

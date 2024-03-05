@@ -30,6 +30,7 @@ export default function Login() {
       ref={scrollViewRef}
       horizontal
       pagingEnabled
+      scrollEventThrottle={16}
       onScrollToIndexFailed={() => null}
       showsHorizontalScrollIndicator={false}
       onScroll={(event) => {
@@ -41,8 +42,7 @@ export default function Login() {
             handleSwipe("left");
           }
         }
-      }}
-    >
+      }}>
       <View style={styles.page}>
         <LoginPage />
       </View>
