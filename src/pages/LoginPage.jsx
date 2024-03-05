@@ -1,5 +1,5 @@
 import { Alert, Image, ScrollView } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Div, P, Touchable } from "../helpers/StyledElements";
 import StringInput from "../helpers/StringInput";
 import { useNavigation } from "@react-navigation/native";
@@ -8,40 +8,41 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LoginPage() {
   const [loginCredentials, setLoginCredentials] = useState({
-    username: "",
+    email: "",
     password: "",
   });
   const navigation = useNavigation();
 
-  useEffect(() => {
-    getUserDataFromStorage();
-  }, []);
-
-  const getUserDataFromStorage = async () => {
-    try {
-      const userDataJSON = await AsyncStorage.getItem("userData");
-      if (userDataJSON !== null) {
-        return JSON.parse(userDataJSON);
-      } else {
-        return null;
-      }
-    } catch (error) {
-      console.error("Error getting user data from AsyncStorage:", error);
-      return null;
-    }
-  };
-
   const handleLogin = async () => {
-    const storedUserData = await getUserDataFromStorage();
-    if (
-      storedUserData &&
-      storedUserData.nick === loginCredentials.username &&
-      storedUserData.password === loginCredentials.password
-    ) {
-      navigation.navigate("Dashboard", { ...storedUserData?.nick });
-    } else {
-      Alert.alert("Uyarı", "Kullanıcı adı veya şifre yanlış.");
-    }
+    fetch("https://fakestoreapi.com/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: loginCredentials.email,
+        password: loginCredentials.password,
+      }),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Giriş başarısız");
+        }
+        return res.json();
+      })
+      .then(async (json) => {
+        console.log(json);
+        // await AsyncStorage.setItem("userInfo", loginCredentials);
+        try {
+          await AsyncStorage.setItem("userData", JSON.stringify(loginCredentials));
+        } catch (error) {
+          console.error("Error saving user data:", error);
+        }
+        navigation.navigate("Dashboard");
+      })
+      .catch((error) => {
+        Alert.alert("Hata", "Giriş Yapılırken bir hata oluştu");
+      });
   };
 
   return (
@@ -59,11 +60,11 @@ export default function LoginPage() {
         <Div styles="w-347 h-143 center  gap-14  ph-14">
           <StringInput
             placeholder="Kullanıcı Adı"
-            value={loginCredentials.username}
+            value={loginCredentials.email}
             onChange={(text) =>
               setLoginCredentials((prev) => ({
                 ...prev,
-                username: text.replace(/\s+/g, ""),
+                email: text.trim(),
               }))
             }
             boxProps={{}}
@@ -79,7 +80,7 @@ export default function LoginPage() {
             onChange={(text) =>
               setLoginCredentials((prev) => ({
                 ...prev,
-                password: text.replace(/\s+/g, ""),
+                password: text.trim(),
               }))
             }
             titleProps={{

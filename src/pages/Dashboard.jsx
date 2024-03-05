@@ -16,6 +16,7 @@ export default function Dashboard() {
   const getUserDataFromStorage = async () => {
     try {
       const userDataJSON = await AsyncStorage.getItem("userData");
+      console.log("userDataJSON", userDataJSON);
 
       if (userDataJSON !== null) {
         const userData = JSON.parse(userDataJSON);
@@ -25,6 +26,7 @@ export default function Dashboard() {
       console.error("Error getting user data from AsyncStorage:", error);
     }
   };
+
   const handleLogout = () => {
     navigation.navigate("Login");
   };
@@ -42,8 +44,14 @@ export default function Dashboard() {
         }}
       />
       <Div styles="flex-1 center contentCenter gap-10">
-        <P styles="font">Merhaba {userData?.nick}</P>
-        <Touchable styles="w-178 h-40 bg-#0300A3 rounded-40 contentCenter">
+        <P styles="font">
+          Merhaba <P styles="c-#0300A3 size-14">{userData?.email}</P>
+        </P>
+        <Touchable
+          onPress={() => {
+            navigation.navigate("Survey");
+          }}
+          styles="w-178 h-40 bg-#0300A3 rounded-40 contentCenter">
           <P styles="font c-white">Ankete Başla</P>
         </Touchable>
       </Div>

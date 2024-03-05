@@ -53,7 +53,7 @@ export default function TabMenu({ state, descriptors, navigation }) {
               <ProfileIcon size={30} color={isFocused ? "#B1B0FF" : "white"} />
             )}
             {label === "Dashboard" && (
-              <Div styles="absolute bottom-20 w-40 h-40 contentCenter bg-#0300A3 rounded-40">
+              <Div styles="absolute bottom-10 w-40 h-40 contentCenter bg-black rounded-40">
                 <HomeIcon size={30} color={isFocused ? "#B1B0FF" : "white"} />
               </Div>
             )}
