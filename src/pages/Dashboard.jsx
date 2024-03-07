@@ -16,7 +16,6 @@ export default function Dashboard() {
   const getUserDataFromStorage = async () => {
     try {
       const userDataJSON = await AsyncStorage.getItem("userData");
-      console.log("userDataJSON", userDataJSON);
 
       if (userDataJSON !== null) {
         const userData = JSON.parse(userDataJSON);

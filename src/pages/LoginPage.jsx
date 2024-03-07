@@ -14,6 +14,7 @@ export default function LoginPage() {
   const navigation = useNavigation();
 
   const handleLogin = async () => {
+    navigation.navigate("Dashboard");
     fetch("https://fakestoreapi.com/auth/login", {
       method: "POST",
       headers: {
@@ -31,8 +32,6 @@ export default function LoginPage() {
         return res.json();
       })
       .then(async (json) => {
-        console.log(json);
-        // await AsyncStorage.setItem("userInfo", loginCredentials);
         try {
           await AsyncStorage.setItem("userData", JSON.stringify(loginCredentials));
         } catch (error) {

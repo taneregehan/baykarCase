@@ -82,7 +82,7 @@ export default function ProgressBar(props: Readonly<ProgressBarProps>) {
 
   return (
     <Div
-      styles={`flexBox bg-${!vertical ? barColor : ""} ${styles || ""} overflow-hidden`}
+      styles={`flexBox bg-${!vertical ? barColor : ""} ${styles || ""} overflow-hidden `}
       onLayout={onLayout}>
       <Animated.View
         style={[
