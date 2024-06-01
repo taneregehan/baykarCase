@@ -1,7 +1,5 @@
 import React from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import SignUpPage from "./pages/SignUpPage";
